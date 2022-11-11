@@ -159,7 +159,8 @@
                                 "operation-name": "/v1/update-client"
                             },
                             "operation-server-interface-configuration": {
-                                "life-cycle-state": "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL"
+                                "life-cycle-state": "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
+                                "operation-key": "Operation key not yet provided."
                             }
                         }
                     }
@@ -227,7 +228,8 @@
                                 "operation-name": "/v1/update-operation-key"
                             },
                             "operation-server-interface-configuration": {
-                                "life-cycle-state": "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL"
+                                "life-cycle-state": "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
+                                "operation-key": "Operation key not yet provided."
                             }
                         }
                     }
