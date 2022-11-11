@@ -1470,6 +1470,11 @@
                                 "logical-termination-point": "aae-1-0-0-op-s-is-000"
                             },
                             {
+                                "local-id": "117",
+                                "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+                                "logical-termination-point": "aae-1-0-0-op-s-im-3001"
+                            },
+                            {
                                 "local-id": "200",
                                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
                                 "logical-termination-point": "aae-1-0-0-op-c-bm-eatl-1-0-0-000"
