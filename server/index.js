@@ -6,10 +6,13 @@ var http = require('http');
 var oas3Tools = require('oas3-tools');
 var serverPort = 8080;
 
+var appCommons = require('onf-core-model-ap/applicationPattern/commons/AppCommons');
+
 // swaggerRouter configuration
 var options = {
     routing: {
-        controllers: path.join(__dirname, './controllers')
+        controllers: path.join(__dirname, './controllers'),
+        openApiValidator: appCommons.openApiValidatorOptions
     },
 };
 
