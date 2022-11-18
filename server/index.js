@@ -15,6 +15,9 @@ var options = {
 
 var expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
 var app = expressAppConfig.getApp();
+var appCommons = require('onf-core-model-ap/applicationPattern/commons/AppCommons');
+
+appCommons.setupExpressApp(app);
 
 // Initialize the Swagger middleware
 http.createServer(app).listen(serverPort, function () {
