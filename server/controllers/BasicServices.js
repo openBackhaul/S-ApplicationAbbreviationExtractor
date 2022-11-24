@@ -30,12 +30,15 @@ module.exports.embedYourself = function embedYourself(req, res, next, body, user
 module.exports.endSubscription = function endSubscription(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
+  let responseBody = {};
   BasicServices.endSubscription(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -46,12 +49,15 @@ module.exports.endSubscription = function endSubscription(req, res, next, body, 
 module.exports.informAboutApplication = function informAboutApplication(req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.OK;
+  let responseBody = {};
   BasicServices.informAboutApplication(user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -62,12 +68,15 @@ module.exports.informAboutApplication = function informAboutApplication(req, res
 module.exports.informAboutApplicationInGenericRepresentation = function informAboutApplicationInGenericRepresentation(req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.OK;
+  let responseBody = {};
   BasicServices.informAboutApplicationInGenericRepresentation(user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -78,12 +87,15 @@ module.exports.informAboutApplicationInGenericRepresentation = function informAb
 module.exports.informAboutReleaseHistory = function informAboutReleaseHistory(req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.OK;
+  let responseBody = {};
   BasicServices.informAboutReleaseHistory(user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -94,12 +106,15 @@ module.exports.informAboutReleaseHistory = function informAboutReleaseHistory(re
 module.exports.informAboutReleaseHistoryInGenericRepresentation = function informAboutReleaseHistoryInGenericRepresentation(req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.OK;
+  let responseBody = {};
   BasicServices.informAboutReleaseHistoryInGenericRepresentation(user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -110,12 +125,15 @@ module.exports.informAboutReleaseHistoryInGenericRepresentation = function infor
 module.exports.inquireOamRequestApprovals = function inquireOamRequestApprovals(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
+  let responseBody = {};
   BasicServices.inquireOamRequestApprovals(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -126,12 +144,15 @@ module.exports.inquireOamRequestApprovals = function inquireOamRequestApprovals(
 module.exports.listLtpsAndFcs = function listLtpsAndFcs(req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.OK;
+  let responseBody = {};
   BasicServices.listLtpsAndFcs(user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -142,12 +163,15 @@ module.exports.listLtpsAndFcs = function listLtpsAndFcs(req, res, next, user, or
 module.exports.redirectOamRequestInformation = function redirectOamRequestInformation(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
+  let responseBody = {};
   BasicServices.redirectOamRequestInformation(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -158,12 +182,15 @@ module.exports.redirectOamRequestInformation = function redirectOamRequestInform
 module.exports.redirectServiceRequestInformation = function redirectServiceRequestInformation(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
+  let responseBody = {};
   BasicServices.redirectServiceRequestInformation(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -174,12 +201,15 @@ module.exports.redirectServiceRequestInformation = function redirectServiceReque
 module.exports.redirectTopologyChangeInformation = function redirectTopologyChangeInformation(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
+  let responseBody = {};
   BasicServices.redirectTopologyChangeInformation(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -190,12 +220,15 @@ module.exports.redirectTopologyChangeInformation = function redirectTopologyChan
 module.exports.registerYourself = function registerYourself(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
+  let responseBody = {};
   BasicServices.registerYourself(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -206,12 +239,15 @@ module.exports.registerYourself = function registerYourself(req, res, next, body
 module.exports.updateClient = function updateClient(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
+  let responseBody = {};
   BasicServices.updateClient(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -222,12 +258,15 @@ module.exports.updateClient = function updateClient(req, res, next, body, user, 
 module.exports.updateOperationClient = function updateOperationClient(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
+  let responseBody = {};
   BasicServices.updateOperationClient(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
@@ -238,12 +277,15 @@ module.exports.updateOperationClient = function updateOperationClient(req, res, 
 module.exports.updateOperationKey = function updateOperationKey(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
+  let responseBody = {};
   BasicServices.updateOperationKey(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (response) {
+      responseBody = response;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
     .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
