@@ -1,200 +1,252 @@
 'use strict';
 
 var utils = require('../utils/writer.js');
-var BasicServices = require('../service/BasicServicesService');
+var BasicServices = require('onf-core-model-ap-bs/basicServices/BasicServicesService');
 var executionAndTraceService = require('onf-core-model-ap/applicationPattern/services/ExecutionAndTraceService');
+var responseBuilder = require('onf-core-model-ap/applicationPattern/rest/server/ResponseBuilder');
+var responseCodeEnum = require('onf-core-model-ap/applicationPattern/rest/server/ResponseCode');
+var restResponseHeader = require('onf-core-model-ap/applicationPattern/rest/server/ResponseHeader');
 
 module.exports.embedYourself = function embedYourself(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  BasicServices.embedYourself(body, user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  let responseBody = {};
+  BasicServices.embedYourself(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      responseBody = response;
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
+      responseBody = response;
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
+    
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.endSubscription = function endSubscription(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  BasicServices.endSubscription(body, user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.endSubscription(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.informAboutApplication = function informAboutApplication(req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.OK;
-  BasicServices.informAboutApplication(user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.informAboutApplication(user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.informAboutApplicationInGenericRepresentation = function informAboutApplicationInGenericRepresentation(req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.OK;
-  BasicServices.informAboutApplicationInGenericRepresentation(user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.informAboutApplicationInGenericRepresentation(user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.informAboutReleaseHistory = function informAboutReleaseHistory(req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.OK;
-  BasicServices.informAboutReleaseHistory(user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.informAboutReleaseHistory(user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.informAboutReleaseHistoryInGenericRepresentation = function informAboutReleaseHistoryInGenericRepresentation(req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.OK;
-  BasicServices.informAboutReleaseHistoryInGenericRepresentation(user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.informAboutReleaseHistoryInGenericRepresentation(user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.inquireOamRequestApprovals = function inquireOamRequestApprovals(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  BasicServices.inquireOamRequestApprovals(body, user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.inquireOamRequestApprovals(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.listLtpsAndFcs = function listLtpsAndFcs(req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.OK;
-  BasicServices.listLtpsAndFcs(user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.listLtpsAndFcs(user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.redirectOamRequestInformation = function redirectOamRequestInformation(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  BasicServices.redirectOamRequestInformation(body, user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.redirectOamRequestInformation(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.redirectServiceRequestInformation = function redirectServiceRequestInformation(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  BasicServices.redirectServiceRequestInformation(body, user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.redirectServiceRequestInformation(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.redirectTopologyChangeInformation = function redirectTopologyChangeInformation(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  BasicServices.redirectTopologyChangeInformation(body, user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.redirectTopologyChangeInformation(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.registerYourself = function registerYourself(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  BasicServices.registerYourself(body, user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.registerYourself(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.updateClient = function updateClient(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  BasicServices.updateClient(body, user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.updateClient(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.updateOperationClient = function updateOperationClient(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  BasicServices.updateOperationClient(body, user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.updateOperationClient(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
 
 module.exports.updateOperationKey = function updateOperationKey(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  BasicServices.updateOperationKey(body, user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
+  BasicServices.updateOperationKey(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    .then(async function (response) {
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     })
-    .catch(function (response) {
+    .catch(async function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
+      responseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
     });
   executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBody);
 };
