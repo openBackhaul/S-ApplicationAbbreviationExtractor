@@ -3,10 +3,11 @@
 var utils = require('../utils/writer.js');
 var HttpServer = require('../service/HttpServerService');
 var oamLogService = require('onf-core-model-ap/applicationPattern/services/OamLogService');
+var responseCodeEnum = require('onf-core-model-ap/applicationPattern/rest/server/ResponseCode');
 
 module.exports.getHttpServerApplicationName = function getHttpServerApplicationName(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  HttpServer.getHttpServerApplicationName(uuid)
+  HttpServer.getHttpServerApplicationName(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -19,7 +20,7 @@ module.exports.getHttpServerApplicationName = function getHttpServerApplicationN
 
 module.exports.getHttpServerApplicationPurpose = function getHttpServerApplicationPurpose(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  HttpServer.getHttpServerApplicationPurpose(uuid)
+  HttpServer.getHttpServerApplicationPurpose(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -32,7 +33,7 @@ module.exports.getHttpServerApplicationPurpose = function getHttpServerApplicati
 
 module.exports.getHttpServerDataUpdatePeriode = function getHttpServerDataUpdatePeriode(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  HttpServer.getHttpServerDataUpdatePeriode(uuid)
+  HttpServer.getHttpServerDataUpdatePeriode(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -45,7 +46,7 @@ module.exports.getHttpServerDataUpdatePeriode = function getHttpServerDataUpdate
 
 module.exports.getHttpServerOwnerEmailAddress = function getHttpServerOwnerEmailAddress(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  HttpServer.getHttpServerOwnerEmailAddress(uuid)
+  HttpServer.getHttpServerOwnerEmailAddress(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -58,7 +59,7 @@ module.exports.getHttpServerOwnerEmailAddress = function getHttpServerOwnerEmail
 
 module.exports.getHttpServerOwnerName = function getHttpServerOwnerName(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  HttpServer.getHttpServerOwnerName(uuid)
+  HttpServer.getHttpServerOwnerName(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -71,7 +72,7 @@ module.exports.getHttpServerOwnerName = function getHttpServerOwnerName(req, res
 
 module.exports.getHttpServerReleaseList = function getHttpServerReleaseList(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  HttpServer.getHttpServerReleaseList(uuid)
+  HttpServer.getHttpServerReleaseList(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -84,7 +85,7 @@ module.exports.getHttpServerReleaseList = function getHttpServerReleaseList(req,
 
 module.exports.getHttpServerReleaseNumber = function getHttpServerReleaseNumber(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  HttpServer.getHttpServerReleaseNumber(uuid)
+  HttpServer.getHttpServerReleaseNumber(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })

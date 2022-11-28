@@ -3,69 +3,70 @@
 var utils = require('../utils/writer.js');
 var OperationServer = require('../service/OperationServerService');
 var oamLogService = require('onf-core-model-ap/applicationPattern/services/OamLogService');
+var responseCodeEnum = require('onf-core-model-ap/applicationPattern/rest/server/ResponseCode');
+var responseBuilder = require('onf-core-model-ap/applicationPattern/rest/server/ResponseBuilder');
 
-module.exports.getOperationServerLifeCycleState = function getOperationServerLifeCycleState(req, res, next, uuid) {
+module.exports.getOperationServerLifeCycleState = async function getOperationServerLifeCycleState(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  OperationServer.getOperationServerLifeCycleState(uuid)
+  await OperationServer.getOperationServerLifeCycleState(req.url)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.getOperationServerOperationKey = function getOperationServerOperationKey(req, res, next, uuid) {
+module.exports.getOperationServerOperationKey = async function getOperationServerOperationKey(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  OperationServer.getOperationServerOperationKey(uuid)
+  await OperationServer.getOperationServerOperationKey(req.url)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.getOperationServerOperationName = function getOperationServerOperationName(req, res, next, uuid) {
+module.exports.getOperationServerOperationName = async function getOperationServerOperationName(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  OperationServer.getOperationServerOperationName(uuid)
+  await OperationServer.getOperationServerOperationName(req.url)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
-
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.putOperationServerLifeCycleState = function putOperationServerLifeCycleState(req, res, next, body, uuid) {
+module.exports.putOperationServerLifeCycleState = async function putOperationServerLifeCycleState(req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  OperationServer.putOperationServerLifeCycleState(body, uuid)
+  await OperationServer.putOperationServerLifeCycleState(req.url, body)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.putOperationServerOperationKey = function putOperationServerOperationKey(req, res, next, body, uuid) {
+module.exports.putOperationServerOperationKey = async function putOperationServerOperationKey(req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  OperationServer.putOperationServerOperationKey(body, uuid)
+  await OperationServer.putOperationServerOperationKey(req.url, body)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };

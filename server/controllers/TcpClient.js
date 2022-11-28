@@ -3,10 +3,11 @@
 var utils = require('../utils/writer.js');
 var TcpClient = require('../service/TcpClientService');
 var oamLogService = require('onf-core-model-ap/applicationPattern/services/OamLogService');
+var responseCodeEnum = require('onf-core-model-ap/applicationPattern/rest/server/ResponseCode');
 
 module.exports.getTcpClientRemoteAddress = function getTcpClientRemoteAddress(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  TcpClient.getTcpClientRemoteAddress(uuid)
+  TcpClient.getTcpClientRemoteAddress(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -19,7 +20,7 @@ module.exports.getTcpClientRemoteAddress = function getTcpClientRemoteAddress(re
 
 module.exports.getTcpClientRemotePort = function getTcpClientRemotePort(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  TcpClient.getTcpClientRemotePort(uuid)
+  TcpClient.getTcpClientRemotePort(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -32,7 +33,7 @@ module.exports.getTcpClientRemotePort = function getTcpClientRemotePort(req, res
 
 module.exports.putTcpClientRemoteAddress = function putTcpClientRemoteAddress(req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  TcpClient.putTcpClientRemoteAddress(body, uuid)
+  TcpClient.putTcpClientRemoteAddress(req.url, body)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -45,7 +46,7 @@ module.exports.putTcpClientRemoteAddress = function putTcpClientRemoteAddress(re
 
 module.exports.putTcpClientRemotePort = function putTcpClientRemotePort(req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  TcpClient.putTcpClientRemotePort(body, uuid)
+  TcpClient.putTcpClientRemotePort(req.url, body)
     .then(function (response) {
       utils.writeJson(res, response);
     })
