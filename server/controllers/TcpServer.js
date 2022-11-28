@@ -3,11 +3,11 @@
 var utils = require('../utils/writer.js');
 var TcpServer = require('../service/TcpServerService');
 var oamLogService = require('onf-core-model-ap/applicationPattern/services/OamLogService');
+var responseCodeEnum = require('onf-core-model-ap/applicationPattern/rest/server/ResponseCode');
 
 module.exports.getTcpServerLocalAddress = function getTcpServerLocalAddress(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  Core.getControlConstruct()
-  TcpServer.getTcpServerLocalAddress(uuid)
+  TcpServer.getTcpServerLocalAddress(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -20,8 +20,7 @@ module.exports.getTcpServerLocalAddress = function getTcpServerLocalAddress(req,
 
 module.exports.getTcpServerLocalPort = function getTcpServerLocalPort(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  Core.getControlConstruct()
-  TcpServer.getTcpServerLocalPort(uuid)
+  TcpServer.getTcpServerLocalPort(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -34,8 +33,7 @@ module.exports.getTcpServerLocalPort = function getTcpServerLocalPort(req, res, 
 
 module.exports.putTcpServerLocalAddress = function putTcpServerLocalAddress(req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  Core.getControlConstruct()
-  TcpServer.putTcpServerLocalAddress(body, uuid)
+  TcpServer.putTcpServerLocalAddress(body, req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -48,7 +46,7 @@ module.exports.putTcpServerLocalAddress = function putTcpServerLocalAddress(req,
 
 module.exports.putTcpServerLocalPort = function putTcpServerLocalPort(req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  TcpServer.putTcpServerLocalPort(body, uuid)
+  TcpServer.putTcpServerLocalPort(req.url, body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

@@ -3,10 +3,11 @@
 var utils = require('../utils/writer.js');
 var HttpClient = require('../service/HttpClientService');
 var oamLogService = require('onf-core-model-ap/applicationPattern/services/OamLogService');
+var responseCodeEnum = require('onf-core-model-ap/applicationPattern/rest/server/ResponseCode');
 
 module.exports.getHttpClientApplicationName = function getHttpClientApplicationName(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  HttpClient.getHttpClientApplicationName(uuid)
+  HttpClient.getHttpClientApplicationName(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -19,7 +20,7 @@ module.exports.getHttpClientApplicationName = function getHttpClientApplicationN
 
 module.exports.getHttpClientReleaseNumber = function getHttpClientReleaseNumber(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  HttpClient.getHttpClientReleaseNumber(uuid)
+  HttpClient.getHttpClientReleaseNumber(req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -32,7 +33,7 @@ module.exports.getHttpClientReleaseNumber = function getHttpClientReleaseNumber(
 
 module.exports.putHttpClientReleaseNumber = function putHttpClientReleaseNumber(req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  HttpClient.putHttpClientReleaseNumber(body, uuid)
+  HttpClient.putHttpClientReleaseNumber(body, req.url)
     .then(function (response) {
       utils.writeJson(res, response);
     })
