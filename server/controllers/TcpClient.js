@@ -5,56 +5,55 @@ var TcpClient = require('../service/TcpClientService');
 var oamLogService = require('onf-core-model-ap/applicationPattern/services/OamLogService');
 var responseBuilder = require('onf-core-model-ap/applicationPattern/rest/server/ResponseBuilder');
 var responseCodeEnum = require('onf-core-model-ap/applicationPattern/rest/server/ResponseCode');
-var restResponseHeader = require('onf-core-model-ap/applicationPattern/rest/server/ResponseHeader');
 
-module.exports.getTcpClientRemoteAddress = function getTcpClientRemoteAddress(req, res, next, uuid) {
+module.exports.getTcpClientRemoteAddress = async function getTcpClientRemoteAddress(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  TcpClient.getTcpClientRemoteAddress(req.url)
+  await TcpClient.getTcpClientRemoteAddress(req.url)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.getTcpClientRemotePort = function getTcpClientRemotePort(req, res, next, uuid) {
+module.exports.getTcpClientRemotePort = async function getTcpClientRemotePort(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  TcpClient.getTcpClientRemotePort(req.url)
+  await TcpClient.getTcpClientRemotePort(req.url)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.putTcpClientRemoteAddress = function putTcpClientRemoteAddress(req, res, next, body, uuid) {
+module.exports.putTcpClientRemoteAddress = async function putTcpClientRemoteAddress(req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  TcpClient.putTcpClientRemoteAddress(req.url, body)
+  await TcpClient.putTcpClientRemoteAddress(req.url, body)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.putTcpClientRemotePort = function putTcpClientRemotePort(req, res, next, body, uuid) {
+module.exports.putTcpClientRemotePort = async function putTcpClientRemotePort(req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  TcpClient.putTcpClientRemotePort(req.url, body)
+  await TcpClient.putTcpClientRemotePort(req.url, body)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };

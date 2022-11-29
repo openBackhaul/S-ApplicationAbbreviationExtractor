@@ -61,7 +61,7 @@ exports.getTcpClientRemotePort = function (url) {
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putTcpClientRemoteIpv4Address = function (url, body) {
+exports.putTcpClientRemoteAddress = function (url, body) {
   return new Promise(async function (resolve, reject) {
     try {
       console.log(body);
