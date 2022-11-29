@@ -1,110 +1,111 @@
 'use strict';
 
-var utils = require('../utils/writer.js');
 var OperationClient = require('../service/OperationClientService');
 var oamLogService = require('onf-core-model-ap/applicationPattern/services/OamLogService');
+var responseBuilder = require('onf-core-model-ap/applicationPattern/rest/server/ResponseBuilder');
 var responseCodeEnum = require('onf-core-model-ap/applicationPattern/rest/server/ResponseCode');
+var restResponseHeader = require('onf-core-model-ap/applicationPattern/rest/server/ResponseHeader');
 
-module.exports.getOperationClientDetailedLoggingIsOn = function getOperationClientDetailedLoggingIsOn(req, res, next, uuid) {
+module.exports.getOperationClientDetailedLoggingIsOn = async function getOperationClientDetailedLoggingIsOn(req, res, next) {
   let responseCode = responseCodeEnum.code.OK;
-  OperationClient.getOperationClientDetailedLoggingIsOn(req.url)
+  await OperationClient.getOperationClientDetailedLoggingIsOn(req.url)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.getOperationClientLifeCycleState = function getOperationClientLifeCycleState(req, res, next, uuid) {
+module.exports.getOperationClientLifeCycleState = async function getOperationClientLifeCycleState(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  OperationClient.getOperationClientLifeCycleState(req.url)
+  await OperationClient.getOperationClientLifeCycleState(req.url)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.getOperationClientOperationKey = function getOperationClientOperationKey(req, res, next, uuid) {
+module.exports.getOperationClientOperationKey = async function getOperationClientOperationKey(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  OperationClient.getOperationClientOperationKey(req.url)
+  await OperationClient.getOperationClientOperationKey(req.url)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.getOperationClientOperationName = function getOperationClientOperationName(req, res, next, uuid) {
+module.exports.getOperationClientOperationName = async function getOperationClientOperationName(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  OperationClient.getOperationClientOperationName(req.url)
+  await OperationClient.getOperationClientOperationName(req.url)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.getOperationClientOperationalState = function getOperationClientOperationalState(req, res, next, uuid) {
+module.exports.getOperationClientOperationalState = async function getOperationClientOperationalState(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  OperationClient.getOperationClientOperationalState(req.url)
+  await OperationClient.getOperationClientOperationalState(req.url)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.putOperationClientDetailedLoggingIsOn = function putOperationClientDetailedLoggingIsOn(req, res, next, body, uuid) {
+module.exports.putOperationClientDetailedLoggingIsOn = async function putOperationClientDetailedLoggingIsOn(req, res, next, body) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  OperationClient.putOperationClientDetailedLoggingIsOn(req.url, body)
+  await OperationClient.putOperationClientDetailedLoggingIsOn(req.url, body)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.putOperationClientOperationKey = function putOperationClientOperationKey(req, res, next, body, uuid) {
+module.exports.putOperationClientOperationKey = async function putOperationClientOperationKey(req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  OperationClient.putOperationClientOperationKey(req.url, body)
+  await OperationClient.putOperationClientOperationKey(req.url, body)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.putOperationClientOperationName = function putOperationClientOperationName(req, res, next, body, uuid) {
+module.exports.putOperationClientOperationName = async function putOperationClientOperationName(req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  OperationClient.putOperationClientOperationName(req.url, body)
+  await OperationClient.putOperationClientOperationName(req.url, body)
     .then(function (response) {
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      utils.writeJson(res, response);
+      responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };

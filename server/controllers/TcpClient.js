@@ -3,7 +3,9 @@
 var utils = require('../utils/writer.js');
 var TcpClient = require('../service/TcpClientService');
 var oamLogService = require('onf-core-model-ap/applicationPattern/services/OamLogService');
+var responseBuilder = require('onf-core-model-ap/applicationPattern/rest/server/ResponseBuilder');
 var responseCodeEnum = require('onf-core-model-ap/applicationPattern/rest/server/ResponseCode');
+var restResponseHeader = require('onf-core-model-ap/applicationPattern/rest/server/ResponseHeader');
 
 module.exports.getTcpClientRemoteAddress = function getTcpClientRemoteAddress(req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
