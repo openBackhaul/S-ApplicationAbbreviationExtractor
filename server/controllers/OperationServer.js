@@ -42,6 +42,7 @@ module.exports.getOperationServerOperationName = async function getOperationServ
       responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
       responseBuilder.buildResponse(res, responseCode, response);
     });
+
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 

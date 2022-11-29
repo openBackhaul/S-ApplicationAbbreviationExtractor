@@ -7,7 +7,7 @@ var fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver
  * uuid String 
  * returns inline_response_200_12
  **/
-exports.getHttpServerApplicationName = function (url) {
+ exports.getHttpServerApplicationName = function (url) {
   return new Promise(async function (resolve, reject) {
     try {
       var value = await fileOperation.readFromDatabaseAsync(url);

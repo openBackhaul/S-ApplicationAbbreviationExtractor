@@ -2,12 +2,12 @@
 var fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
 
 /**
- * Returns remote IPv4 address
+ * Returns remote address
  *
  * uuid String 
- * returns inline_response_200_28
+ * returns inline_response_200_27
  **/
-exports.getTcpClientRemoteIpv4Address = function (url) {
+exports.getTcpClientRemoteAddress = function(url) {
   return new Promise(async function (resolve, reject) {
     try {
       var value = await fileOperation.readFromDatabaseAsync(url);
@@ -61,7 +61,7 @@ exports.getTcpClientRemotePort = function (url) {
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putTcpClientRemoteIpv4Address = function (url, body) {
+exports.putTcpClientRemoteAddress = function (url, body) {
   return new Promise(async function (resolve, reject) {
     try {
       console.log(body);

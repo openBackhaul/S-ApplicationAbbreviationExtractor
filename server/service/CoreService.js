@@ -6,7 +6,7 @@ var fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver
  *
  * returns inline_response_200_8
  **/
-exports.getControlConstruct = function () {
+exports.getControlConstruct = function() {
   return new Promise(async function (resolve, reject) {
     try {
       var value = await fileOperation.readFromDatabaseAsync("core-model-1-4:control-construct");

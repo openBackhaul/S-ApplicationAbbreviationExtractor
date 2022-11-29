@@ -1,5 +1,4 @@
 'use strict';
-
 var fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
 
 /**
@@ -61,7 +60,7 @@ exports.getTcpServerLocalPort = function (url) {
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putTcpServerLocalAddress = function(body,url) {
+exports.putTcpServerLocalAddress = function(url,body) {
   return new Promise(async function (resolve, reject) {
     try {
       await fileOperation.writeToDatabaseAsync(url, body, false);
