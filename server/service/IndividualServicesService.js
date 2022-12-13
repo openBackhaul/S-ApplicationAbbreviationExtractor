@@ -1,11 +1,16 @@
 'use strict';
 
+const tcpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpServerInterface');
 const logicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
 const httpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
 const controlConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ControlConstruct');
 const layerProtocol = require('onf-core-model-ap/applicationPattern/onfModel/models/LayerProtocol');
 const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfAttributes');
-
+const operationServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationServerInterface');
+const consequentAction = require('onf-core-model-ap/applicationPattern/rest/server/responseBody/ConsequentAction');
+const httpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpServerInterface');
+const responseValue = require('onf-core-model-ap/applicationPattern/rest/server/responseBody/ResponseValue');
+const onfAttributeFormatter = require('onf-core-model-ap/applicationPattern/onfModel/utility/OnfAttributeFormatter');
 
 /**
  * Initiates process of embedding a new release
@@ -81,22 +86,52 @@ exports.listApplications = function (user, originator, xCorrelator, traceIndicat
  * returns inline_response_200_1
  **/
 exports.startApplicationInGenericRepresentation = function (user, originator, xCorrelator, traceIndicator, customerJourney, url) {
-  return new Promise(function (resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-      "consequent-action-list": [{
-        "label": "Inform about Application",
-        "request": "https://10.118.125.157:1000/v1/inform-about-application-in-generic-representation",
-        "display-in-new-browser-window": false
-      }],
-      "response-value-list": [{
-        "field-name": "applicationName",
-        "value": "OwnApplicationName",
-        "datatype": "string"
-      }]
-    };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+  return new Promise(async function (resolve, reject) {
+    let response = {};
+    try {
+      /****************************************************************************************
+       * Preparing consequent-action-list for response body
+       ****************************************************************************************/
+      let consequentActionList = [];
+
+      let protocol = "http";
+      let applicationAddress = await tcpServerInterface.getLocalAddress();
+      let applicationPort = await tcpServerInterface.getLocalPort();
+      let baseUrl = protocol + "://" + applicationAddress + ":" + applicationPort;
+
+      let LabelForInformAboutApplication = "Inform about Application";
+      let requestForInformAboutApplication = baseUrl + await operationServerInterface.getOperationNameAsync("aae-1-0-0-op-s-bs-002");
+      let consequentActionForInformAboutApplication = new consequentAction(
+        LabelForInformAboutApplication,
+        requestForInformAboutApplication,
+        false
+      );
+      consequentActionList.push(consequentActionForInformAboutApplication);
+
+      /****************************************************************************************
+       * Preparing response-value-list for response body
+       ****************************************************************************************/
+      let responseValueList = [];
+      let applicationName = await httpServerInterface.getApplicationNameAsync();
+      let reponseValue = new responseValue(
+        "applicationName",
+        applicationName,
+        typeof applicationName
+      );
+      responseValueList.push(reponseValue);
+
+      /****************************************************************************************
+       * Setting 'application/json' response body
+       ****************************************************************************************/
+      response['application/json'] = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase({
+        consequentActionList,
+        responseValueList
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    if (Object.keys(response).length > 0) {
+      resolve(response[Object.keys(response)[0]]);
     } else {
       resolve();
     }
